@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    @Binding var selected: Int
+    var categories: [String] 
+    @Binding var selected: String
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 Spacer(minLength: 5)
-                ForEach(0..<4) { i in
-                    CategoryRoundedView(selected: selected == i)
+                ForEach(categories, id: \.self) { category in
+                    CategoryRoundedView(category: category, selected: selected == category)
                         .onTapGesture {
-                            if selected == i {
-                                selected = -1
+                            if selected == category{
+                                selected = ""
                             } else {
-                                self.selected = i
+                                self.selected = category
                             }
                         }
                 }
@@ -36,6 +37,6 @@ struct CategoryListView: View {
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryListView(selected: .constant(0))
+        CategoryListView(categories: ["test"], selected: .constant(""))
     }
 }

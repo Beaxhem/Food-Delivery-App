@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryRoundedView: View {
+    var category: String
     var selected: Bool
     
     var body: some View {
@@ -21,7 +22,7 @@ struct CategoryRoundedView: View {
                 Image(systemName: "leaf.fill")
                     .foregroundColor(self.selected ? .white : .green)
             }
-            Text("Vegetarian")
+            Text(category)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(selected ? .white : .black)
         }
@@ -34,6 +35,6 @@ struct CategoryRoundedView: View {
 
 struct CategoryRoundedView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryRoundedView(selected: false)
+        CategoryRoundedView(category: "Test", selected: false)
     }
 }

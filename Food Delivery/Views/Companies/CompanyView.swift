@@ -62,6 +62,6 @@ struct CompanyView: View {
 
 struct CompanyView_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyView(company: Company(id: 0, name: "Test", imageName: "mcdonalds"))
+        CompanyView(company: Company(name: "Test", imageName: "mcdonalds"))
     }
 }

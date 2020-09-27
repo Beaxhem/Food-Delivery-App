@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CompanyDetails: View {
     var company: Company
-    @State var selectedCategory = -1
+    
     
     var body: some View {
         
@@ -45,13 +45,7 @@ struct CompanyDetails: View {
                         
                     }
                     
-                    CategoryListView(selected: $selectedCategory)
-                    
-                    VStack(alignment: .leading) {
-                        
-                        
-                    }
-                    .padding()
+                    ProductsListView(companyID: company.id)
                     
                     Spacer()
                 }
@@ -65,7 +59,7 @@ struct CompanyDetails: View {
 struct CompanyDetails_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CompanyDetails(company: Company(id: 0, name: "test", imageName: "mcdonalds"))
+            CompanyDetails(company: Company(name: "test", imageName: "mcdonalds"))
         }
     }
 }
