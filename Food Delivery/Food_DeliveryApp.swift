@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 @main
 struct Food_DeliveryApp: App {
+
+        
     var body: some Scene {
         WindowGroup {
-            RootView()
+            
+            RootView().environmentObject(PartialSheetManager())
+            
         }
     }
 }

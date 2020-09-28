@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct ProductCellView: View {
     var product: Product
+    
+    @EnvironmentObject var partialSheet : PartialSheetManager
+
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -23,10 +27,21 @@ struct ProductCellView: View {
             }
             .padding()
         }
+        .onTapGesture {
+            
+            self.partialSheet.showPartialSheet({
+                
+            }) {
+                ProductActionView(product: product)
+            }
+            
+        }
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 3)
+        
     }
+    
 }
 
 struct ProductCellView_Previews: PreviewProvider {

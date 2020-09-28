@@ -29,14 +29,17 @@ struct ProductsListView: View {
                         ForEach(getIndices(of: groups[key]!), id: \.self) { idx in
                             HStack {
                                 ProductCellView(product: groups[key]![idx])
+                                    
                                 
                                 Spacer()
                                 if groups[key]!.indices.contains(idx + 1) {
                                     ProductCellView(product: groups[key]![idx + 1])
+                                       
                                 }
 
                             }
-                        }
+                        }.transition(.move(edge: .bottom))
+                        
                     }.padding(.bottom)
                 } else {
                     Text(selectedCategory)

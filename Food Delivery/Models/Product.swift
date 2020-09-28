@@ -21,4 +21,12 @@ class Product: Identifiable {
         self.imageName = imageName
         self.category = category
     }
+    
+    init() {
+        self.id = UUID()
+        self.name = ""
+        self.price = 0.0
+        self.imageName = ""
+        self.category = ""
+    }
 }

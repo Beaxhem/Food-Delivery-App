@@ -70,7 +70,8 @@ struct CompaniesView: View {
                 }.padding()
                 
             }
-            .navigationTitle("Companies")
+            .navigationTitle("Browse")
+
         }
         
     }

@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct CompanyDetails: View {
+    
     var company: Company
-    
-    
+
     var body: some View {
         
             ScrollView {
@@ -44,16 +45,19 @@ struct CompanyDetails: View {
                     
                         
                     }
-                    
+                
                     ProductsListView(companyID: company.id)
+                        
+                        
+                   
+                    
                     
                     Spacer()
                 }
             }.edgesIgnoringSafeArea(.top)
-            
-        
-        
-    }
+
+        }
+    
 }
 
 struct CompanyDetails_Previews: PreviewProvider {

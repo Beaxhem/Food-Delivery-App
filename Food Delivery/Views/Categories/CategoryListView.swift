@@ -18,11 +18,14 @@ struct CategoryListView: View {
                 ForEach(categories, id: \.self) { category in
                     CategoryRoundedView(category: category, selected: selected == category)
                         .onTapGesture {
-                            if selected == category{
-                                selected = ""
-                            } else {
-                                self.selected = category
+                            withAnimation {
+                                if selected == category{
+                                    selected = ""
+                                } else {
+                                    self.selected = category
+                                }
                             }
+                            
                         }
                 }
                 Spacer(minLength: 5)
