@@ -42,6 +42,9 @@
 		88BD33A12521448100442DB8 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD33A02521448100442DB8 /* UIScreen.swift */; };
 		88BD33A7252146E300442DB8 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 88BD33A6252146E300442DB8 /* PartialSheet */; };
 		88BD33AD2521490E00442DB8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD33AC2521490E00442DB8 /* Modal.swift */; };
+		88F212C0252335CF00D44E38 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F212BF252335CF00D44E38 /* Cart.swift */; };
+		88F212C525233CDB00D44E38 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F212C425233CDB00D44E38 /* CartView.swift */; };
+		88F212D12523413900D44E38 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F212D02523413900D44E38 /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,9 @@
 		88BD339225212BE300442DB8 /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
 		88BD33A02521448100442DB8 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		88BD33AC2521490E00442DB8 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		88F212BF252335CF00D44E38 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		88F212C425233CDB00D44E38 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		88F212D02523413900D44E38 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		BAEE617AB9D2842FB11AAB70 /* Pods_Food_Delivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food_Delivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2AEF0B5C00C395D6C2CEE6 /* Pods-Food Delivery-Food DeliveryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food Delivery-Food DeliveryUITests.debug.xcconfig"; path = "Target Support Files/Pods-Food Delivery-Food DeliveryUITests/Pods-Food Delivery-Food DeliveryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C5D5AEAD3E79617818AC7DEE /* Pods-Food DeliveryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food DeliveryTests.release.xcconfig"; path = "Target Support Files/Pods-Food DeliveryTests/Pods-Food DeliveryTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		881AC8CF251DCFE400623F7C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88F212C925233D1F00D44E38 /* Cart */,
 				88BD33AB2521490000442DB8 /* Modal */,
 				887C7CCD251EA46D0061F6D3 /* Discounts */,
 				887C7CBF251E9BD50061F6D3 /* Categories */,
@@ -169,6 +176,7 @@
 				881AC8EB251DD12A00623F7C /* Company.swift */,
 				887C7CD9251EA4B90061F6D3 /* Discount.swift */,
 				88BD338D252123AC00442DB8 /* Product.swift */,
+				88F212BF252335CF00D44E38 /* Cart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 				887C7CE3251EA52F0061F6D3 /* Color.swift */,
 				88BD33A02521448100442DB8 /* UIScreen.swift */,
 				880F71B425227F5100E1A764 /* NavigationView.swift */,
+				88F212D02523413900D44E38 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +321,14 @@
 				88BD33AC2521490E00442DB8 /* Modal.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		88F212C925233D1F00D44E38 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				88F212C425233CDB00D44E38 /* CartView.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		94A9821D1D180C3356A661B6 /* Pods */ = {
@@ -534,9 +551,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88F212C525233CDB00D44E38 /* CartView.swift in Sources */,
 				88BD33862521239D00442DB8 /* ProductsListView.swift in Sources */,
+				88F212D12523413900D44E38 /* View.swift in Sources */,
 				887C7CD0251EA48D0061F6D3 /* DiscountsListView.swift in Sources */,
 				881AC8E7251DD11B00623F7C /* CompaniesListView.swift in Sources */,
+				88F212C0252335CF00D44E38 /* Cart.swift in Sources */,
 				889E36DB25209D0F00B3236C /* RatingView.swift in Sources */,
 				88BD339325212BE300442DB8 /* ProductCellView.swift in Sources */,
 				887C7CDF251EA50F0061F6D3 /* CGFloat.swift in Sources */,

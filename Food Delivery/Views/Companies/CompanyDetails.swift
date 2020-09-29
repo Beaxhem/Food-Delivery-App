@@ -9,11 +9,13 @@ import SwiftUI
 import PartialSheet
 
 struct CompanyDetails: View {
-    
     var company: Company
-
+    
+    @State var isCartOpened = false
+    
     var body: some View {
-        
+        ZStack {
+            
             ScrollView {
                 VStack(alignment: .leading) {
                     
@@ -45,19 +47,25 @@ struct CompanyDetails: View {
                     
                         
                     }
-                
                     ProductsListView(companyID: company.id)
-                        
-                        
-                   
-                    
                     
                     Spacer()
                 }
             }.edgesIgnoringSafeArea(.top)
-
+            
+            GeometryReader { geometry in
+                CartView(isOpened: $isCartOpened)
+                    .frame(width: isCartOpened ? geometry.size.width : 75, height: isCartOpened ? geometry.size.height : 75)
+                    .position(x: isCartOpened ? geometry.size.width / 2 : geometry.size.width - 50, y : isCartOpened ? geometry.size.height / 2 : geometry.size.height - 50)
+                
+            }
+            
         }
-    
+        
+
+        
+    }
+            
 }
 
 struct CompanyDetails_Previews: PreviewProvider {

@@ -13,6 +13,7 @@ enum Options: String {
 }
 public struct ProductActionView: View {
     var product: Product
+    var callback: () -> Void
     
     public var body: some View {
         
@@ -50,7 +51,7 @@ public struct ProductActionView: View {
                 Spacer()
                 
                 Button(action: {
-                    print("test")
+                    callback()
                 }) {
                     Text("Add to cart")
                         .foregroundColor(.white)

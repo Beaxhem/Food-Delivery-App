@@ -12,7 +12,6 @@ struct ProductCellView: View {
     var product: Product
     
     @EnvironmentObject var partialSheet : PartialSheetManager
-
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,13 +27,12 @@ struct ProductCellView: View {
             .padding()
         }
         .onTapGesture {
-            
             self.partialSheet.showPartialSheet({
-                
             }) {
-                ProductActionView(product: product)
+                ProductActionView(product: product, callback: {
+                    addToCart()
+                })
             }
-            
         }
         .background(Color.white)
         .cornerRadius(10)
@@ -42,6 +40,9 @@ struct ProductCellView: View {
         
     }
     
+    func addToCart() {
+        
+    }
 }
 
 struct ProductCellView_Previews: PreviewProvider {
