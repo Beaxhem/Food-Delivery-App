@@ -12,6 +12,15 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    func ifTrue(_ condition:Bool, apply:(AnyView) -> (AnyView)) -> AnyView {
+        if condition {
+            return apply(AnyView(self))
+        }
+        else {
+            return AnyView(self)
+        }
+    }
 }
 
 struct RoundedCorner: Shape {

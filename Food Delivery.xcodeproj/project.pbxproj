@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,12 @@
 		881AC8E7251DD11B00623F7C /* CompaniesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881AC8E6251DD11B00623F7C /* CompaniesListView.swift */; };
 		881AC8EC251DD12A00623F7C /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881AC8EB251DD12A00623F7C /* Company.swift */; };
 		881AC8F1251DD18C00623F7C /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881AC8F0251DD18C00623F7C /* DatabaseManager.swift */; };
+		886866AE2523C6D8002ED034 /* CustomPartialSheetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866AD2523C6D8002ED034 /* CustomPartialSheetsManager.swift */; };
+		886866B32523C77E002ED034 /* PartialSheetStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866B22523C77E002ED034 /* PartialSheetStyles.swift */; };
+		886866B82523C804002ED034 /* CustomPartialSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866B72523C804002ED034 /* CustomPartialSheet.swift */; };
+		886866BD2523C93C002ED034 /* CustomBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866BC2523C93C002ED034 /* CustomBlurEffect.swift */; };
+		886866C22523C973002ED034 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866C12523C973002ED034 /* Device.swift */; };
+		886866C72523CB5A002ED034 /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886866C62523CB5A002ED034 /* ViewModifier.swift */; };
 		887A6F7F251DCF4100703A26 /* Food_DeliveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A6F7E251DCF4100703A26 /* Food_DeliveryApp.swift */; };
 		887A6F83251DCF4400703A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887A6F82251DCF4400703A26 /* Assets.xcassets */; };
 		887A6F86251DCF4400703A26 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887A6F85251DCF4400703A26 /* Preview Assets.xcassets */; };
@@ -40,7 +46,6 @@
 		88BD338E252123AC00442DB8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD338D252123AC00442DB8 /* Product.swift */; };
 		88BD339325212BE300442DB8 /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD339225212BE300442DB8 /* ProductCellView.swift */; };
 		88BD33A12521448100442DB8 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD33A02521448100442DB8 /* UIScreen.swift */; };
-		88BD33A7252146E300442DB8 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 88BD33A6252146E300442DB8 /* PartialSheet */; };
 		88BD33AD2521490E00442DB8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD33AC2521490E00442DB8 /* Modal.swift */; };
 		88F212C0252335CF00D44E38 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F212BF252335CF00D44E38 /* Cart.swift */; };
 		88F212C525233CDB00D44E38 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F212C425233CDB00D44E38 /* CartView.swift */; };
@@ -78,6 +83,12 @@
 		881AC8E6251DD11B00623F7C /* CompaniesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListView.swift; sourceTree = "<group>"; };
 		881AC8EB251DD12A00623F7C /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		881AC8F0251DD18C00623F7C /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		886866AD2523C6D8002ED034 /* CustomPartialSheetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPartialSheetsManager.swift; sourceTree = "<group>"; };
+		886866B22523C77E002ED034 /* PartialSheetStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialSheetStyles.swift; sourceTree = "<group>"; };
+		886866B72523C804002ED034 /* CustomPartialSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPartialSheet.swift; sourceTree = "<group>"; };
+		886866BC2523C93C002ED034 /* CustomBlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBlurEffect.swift; sourceTree = "<group>"; };
+		886866C12523C973002ED034 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		886866C62523CB5A002ED034 /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 		887A6F7B251DCF4100703A26 /* Food Delivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Delivery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		887A6F7E251DCF4100703A26 /* Food_DeliveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food_DeliveryApp.swift; sourceTree = "<group>"; };
 		887A6F82251DCF4400703A26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,7 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88BD33A7252146E300442DB8 /* PartialSheet in Frameworks */,
 				4F3B5E8CA682B6D3177C0550 /* Pods_Food_Delivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +168,7 @@
 		881AC8CF251DCFE400623F7C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				886866AC2523C6A2002ED034 /* CustomPartialSheets */,
 				88F212C925233D1F00D44E38 /* Cart */,
 				88BD33AB2521490000442DB8 /* Modal */,
 				887C7CCD251EA46D0061F6D3 /* Discounts */,
@@ -210,6 +221,19 @@
 				88F212D02523413900D44E38 /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		886866AC2523C6A2002ED034 /* CustomPartialSheets */ = {
+			isa = PBXGroup;
+			children = (
+				886866AD2523C6D8002ED034 /* CustomPartialSheetsManager.swift */,
+				886866B22523C77E002ED034 /* PartialSheetStyles.swift */,
+				886866B72523C804002ED034 /* CustomPartialSheet.swift */,
+				886866BC2523C93C002ED034 /* CustomBlurEffect.swift */,
+				886866C12523C973002ED034 /* Device.swift */,
+				886866C62523CB5A002ED034 /* ViewModifier.swift */,
+			);
+			path = CustomPartialSheets;
 			sourceTree = "<group>";
 		};
 		887A6F72251DCF4000703A26 = {
@@ -362,7 +386,6 @@
 			);
 			name = "Food Delivery";
 			packageProductDependencies = (
-				88BD33A6252146E300442DB8 /* PartialSheet */,
 			);
 			productName = "Food Delivery";
 			productReference = 887A6F7B251DCF4100703A26 /* Food Delivery.app */;
@@ -438,7 +461,6 @@
 			);
 			mainGroup = 887A6F72251DCF4000703A26;
 			packageReferences = (
-				88BD33A5252146E300442DB8 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = 887A6F7C251DCF4100703A26 /* Products */;
 			projectDirPath = "";
@@ -563,22 +585,28 @@
 				88BD33A12521448100442DB8 /* UIScreen.swift in Sources */,
 				881AC8D6251DD00A00623F7C /* RootView.swift in Sources */,
 				887C7CB2251E95430061F6D3 /* CompanyView.swift in Sources */,
+				886866AE2523C6D8002ED034 /* CustomPartialSheetsManager.swift in Sources */,
 				880F71C22522865E00E1A764 /* CheckboxField.swift in Sources */,
 				881AC8F1251DD18C00623F7C /* DatabaseManager.swift in Sources */,
 				88BD33AD2521490E00442DB8 /* Modal.swift in Sources */,
 				887C7CD5251EA4980061F6D3 /* DiscountView.swift in Sources */,
 				887C7CDA251EA4B90061F6D3 /* Discount.swift in Sources */,
 				887C7CE4251EA52F0061F6D3 /* Color.swift in Sources */,
+				886866C72523CB5A002ED034 /* ViewModifier.swift in Sources */,
+				886866C22523C973002ED034 /* Device.swift in Sources */,
 				887C7CC9251E9BF60061F6D3 /* CategoryRectView.swift in Sources */,
 				887A6F7F251DCF4100703A26 /* Food_DeliveryApp.swift in Sources */,
 				880F71B02522607100E1A764 /* ProductActionView.swift in Sources */,
 				889E36EE25209FB400B3236C /* CategoryListView.swift in Sources */,
+				886866B82523C804002ED034 /* CustomPartialSheet.swift in Sources */,
+				886866BD2523C93C002ED034 /* CustomBlurEffect.swift in Sources */,
 				887C7CB8251E98EA0061F6D3 /* SearchFieldView.swift in Sources */,
 				889E36D0251FD85100B3236C /* CompanyDetails.swift in Sources */,
 				887C7CC1251E9BE80061F6D3 /* CategoriesCatalogView.swift in Sources */,
 				881AC8EC251DD12A00623F7C /* Company.swift in Sources */,
 				880F71B525227F5100E1A764 /* NavigationView.swift in Sources */,
 				889E36F32520A0DE00B3236C /* CategoryRoundedView.swift in Sources */,
+				886866B32523C77E002ED034 /* PartialSheetStyles.swift in Sources */,
 				881AC8DC251DD02E00623F7C /* CompaniesView.swift in Sources */,
 				88BD338E252123AC00442DB8 /* Product.swift in Sources */,
 			);
@@ -906,25 +934,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		88BD33A5252146E300442DB8 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.11;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		88BD33A6252146E300442DB8 /* PartialSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 88BD33A5252146E300442DB8 /* XCRemoteSwiftPackageReference "PartialSheet" */;
-			productName = PartialSheet;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 887A6F73251DCF4000703A26 /* Project object */;
 }

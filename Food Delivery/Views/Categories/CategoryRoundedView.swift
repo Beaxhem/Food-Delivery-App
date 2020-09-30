@@ -12,7 +12,6 @@ struct CategoryRoundedView: View {
     var selected: Bool
     
     var body: some View {
-        
         HStack {
             
             ZStack {
@@ -27,8 +26,9 @@ struct CategoryRoundedView: View {
                 .foregroundColor(selected ? .white : .black)
         }
         .padding(5)
+        .padding(.trailing, 10)
         .background(self.selected ? Color.green : Color.white)
-        .cornerRadius(17)
+        .cornerRadius(25)
         .shadow(radius: 3)
     }
 }

@@ -9,29 +9,47 @@ import SwiftUI
 
 struct CartView: View {
     @Binding var isOpened: Bool
+    @EnvironmentObject var partialSheet : CustomPartialSheetManager
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                if isOpened {
-                     Text("Hello")
-                    
-                } else {
-                    CartButtonView()
-                }
-                
-            }
+        CartButtonView()
             .onTapGesture {
-                withAnimation {
-                    isOpened.toggle()
+                self.partialSheet.showPartialSheet({}, style: cartSheetStyle) {
+                    CartListView()
                 }
-                
             }
-            .frame(width: isOpened ? geometry.size.width : 75, height: isOpened ? geometry.size.height : 75)
+            .frame(width: 75, height: 75)
             .background(Color.blue)
-            .cornerRadius(isOpened ? 15 : 25, corners: isOpened ? [.topLeft, .topRight] : .allCorners )
+            .cornerRadius(37.5)
             .shadow(color: .blue, radius: 1)
+    }
+}
+
+struct CartListView: View {
+    @EnvironmentObject var cart: Cart
+    @EnvironmentObject var partialSheet : CustomPartialSheetManager
+    
+    public var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Image(systemName: "multiply")
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.black)
+                    .onTapGesture {
+                        withAnimation {
+                            partialSheet.closePartialSheet()
+                        }
+                    }
+            }
+            
+            ForEach(cart.items) { item in
+                Text(item.product.name)
+            }
+            
+            Spacer()
         }
+        .padding()
         
     }
 }

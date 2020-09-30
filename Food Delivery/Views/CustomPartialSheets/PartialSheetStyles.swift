@@ -1,0 +1,93 @@
+//
+//  PartialSheetStyles.swift
+//  Food Delivery
+//
+//  Created by Ilya Senchukov on 29.09.2020.
+//
+
+import SwiftUI
+
+let cartSheetStyle = CustomPartialSheetStyle(background: .solid(.white),
+                                      handlerBarColor: Color(UIColor.systemGray2),
+                                      enableCover: true,
+                                      coverColor: Color.black.opacity(0.4),
+                                      blurEffectStyle: nil,
+                                      cornerRadius: 10,
+                                      minTopDistance: 300
+       )
+let addToCartSheetStyle = CustomPartialSheetStyle(background: .blur(.systemMaterialDark),
+                                   handlerBarColor: Color(UIColor.systemGray2),
+                                   enableCover: true,
+                                   coverColor: Color.black.opacity(0.4),
+                                   blurEffectStyle: nil,
+                                   cornerRadius: 10,
+                                   minTopDistance: 300
+    )
+
+public struct CustomPartialSheetStyle {
+
+    /// Background enum
+    public enum PartialSheetBackground {
+        case solid(Color)
+        case blur(UIBlurEffect.Style)
+    }
+    
+    /// The background of the sheet
+    var background: PartialSheetBackground
+
+    /// The color of the Handlander Bar and the X button on ipad and mac
+    var handlerBarColor: Color
+
+    /// Tells if should be there a cover between the Partial Sheet and the Content
+    var enableCover: Bool
+
+    /// The color of the cover
+    var coverColor: Color
+
+    /// The blur effect style to applied between the partialSheet and the Presenter Conter
+    var blurEffectStyle: UIBlurEffect.Style?
+
+    /// The corner radius of Sheet
+    var cornerRadius: CGFloat
+    
+    /// Minimum distance between the top of the sheet and the top of the screen
+    var minTopDistance: CGFloat
+    
+    public init(background: PartialSheetBackground,
+                handlerBarColor: Color,
+                enableCover: Bool,
+                coverColor: Color,
+                blurEffectStyle: UIBlurEffect.Style? = nil,
+                cornerRadius: CGFloat,
+                minTopDistance: CGFloat
+    ) {
+        self.background = background
+        self.handlerBarColor = handlerBarColor
+        self.enableCover = enableCover
+        self.coverColor = coverColor
+        self.cornerRadius = cornerRadius
+        self.minTopDistance = minTopDistance
+    }
+}
+
+extension CustomPartialSheetStyle {
+
+    /** A default Style for the PartialSheet with system colors.
+
+     - background: .solid(Color(UIColor.tertiarySystemBackground))
+     - handlerBarColor: Color(UIColor.systemGray2)
+     - enableCover: true
+     - coverColor: Color.black.opacity(0.4)
+     - blurEffectStyle: nil
+     */
+    public static func defaultStyle() -> CustomPartialSheetStyle {
+        return CustomPartialSheetStyle(background: .solid(Color(UIColor.tertiarySystemBackground)),
+                                 handlerBarColor: Color(UIColor.systemGray2),
+                                 enableCover: true,
+                                 coverColor: Color.black.opacity(0.4),
+                                 blurEffectStyle: nil,
+                                 cornerRadius: 10,
+                                 minTopDistance: 110
+        )
+    }
+}

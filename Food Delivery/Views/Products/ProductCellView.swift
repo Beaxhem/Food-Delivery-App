@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct ProductCellView: View {
     var product: Product
     
-    @EnvironmentObject var partialSheet : PartialSheetManager
+    @EnvironmentObject var partialSheet : CustomPartialSheetManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -27,8 +26,8 @@ struct ProductCellView: View {
             .padding()
         }
         .onTapGesture {
-            self.partialSheet.showPartialSheet({
-            }) {
+            
+            self.partialSheet.showPartialSheet({}, style: addToCartSheetStyle) {
                 ProductActionView(product: product, callback: {
                     addToCart()
                 })

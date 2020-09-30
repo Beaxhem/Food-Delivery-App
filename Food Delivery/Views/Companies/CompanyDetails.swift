@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct CompanyDetails: View {
     var company: Company
@@ -55,8 +54,9 @@ struct CompanyDetails: View {
             
             GeometryReader { geometry in
                 CartView(isOpened: $isCartOpened)
-                    .frame(width: isCartOpened ? geometry.size.width : 75, height: isCartOpened ? geometry.size.height : 75)
-                    .position(x: isCartOpened ? geometry.size.width / 2 : geometry.size.width - 50, y : isCartOpened ? geometry.size.height / 2 : geometry.size.height - 50)
+                    .transition(.slide)
+                    .frame(width: isCartOpened ? geometry.size.width : 75, height: isCartOpened ? geometry.size.height - 30 : 75)
+                    .position(x: isCartOpened ? geometry.size.width / 2 : geometry.size.width - 50, y : isCartOpened ? geometry.size.height / 2 + 15: geometry.size.height - 50)
                 
             }
             

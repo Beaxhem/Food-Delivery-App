@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct RootView: View {
     @State private var selectedIndex: Int = 0
@@ -16,20 +15,12 @@ struct RootView: View {
         
     }
     
-    let sheetStyle = PartialSheetStyle(background: .blur(.systemMaterialDark),
-                                           handlerBarColor: Color(UIColor.systemGray2),
-                                           enableCover: true,
-                                           coverColor: Color.black.opacity(0.4),
-                                           blurEffectStyle: nil,
-                                           cornerRadius: 10,
-                                           minTopDistance: 300
-        )
-    
     var body: some View {
+    
         TabView(selection: $selectedIndex) {
             CompaniesView()
                 .tabItem {
-                    Image(systemName: "house.fill")
+                    Image(systemName: "figure.wave")
                     Text("Order")
                 }
                 .tag(0)
@@ -49,7 +40,19 @@ struct RootView: View {
         }
         .accentColor(.black)
         .background(Color.white)
-        .addPartialSheet(style: self.sheetStyle)
+        .addPartialSheet()
+         
+//        .ifTrue(settings.isAddToCartMenuOpened) {
+//            AnyView($0.addPartialSheet(style: self.addToCartSheetStyle))
+////            AnyView($0.partialSheet(isPresented: .constant(true), content: settings.content))
+//        }
+//        .ifTrue(settings.isCartOpened) {
+//            AnyView($0.addPartialSheet(style: self.cartSheetStyle))
+//        }
+//        .addPartialSheet(style: settings.isAddToCartMenuOpened ? self.addToCartSheetStyle : self.cartSheetStyle)
+        
+        
+        
     }
 }
 

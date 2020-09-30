@@ -33,11 +33,13 @@ class Cart: ObservableObject {
     }
 }
 
-class CartItem {
+class CartItem: Identifiable {
+    var id: UUID
     var product: Product
     var count: Int
     
     init(product: Product, count: Int = 1) {
+        self.id = UUID()
         self.product = product
         self.count = count
     }

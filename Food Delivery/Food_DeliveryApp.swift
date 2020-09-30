@@ -6,17 +6,16 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 @main
 struct Food_DeliveryApp: App {
     var cart = Cart()
-        
+    
     var body: some Scene {
         WindowGroup {
             
             RootView()
-                .environmentObject(PartialSheetManager())
+                .environmentObject(CustomPartialSheetManager())
                 .environmentObject(cart)
         }
     }
