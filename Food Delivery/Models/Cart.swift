@@ -18,8 +18,9 @@ class Cart: ObservableObject {
         self.items = items
     }
     
-    func addToCart(item: CartItem) {
-        self.items.append(item)
+    func addToCart(item: Product) {
+        let cartItem = CartItem(product: item)
+        self.items.append(cartItem)
     }
     
     func totalSum() -> Float {
@@ -30,6 +31,12 @@ class Cart: ObservableObject {
         }
         
         return total
+    }
+    
+    func count() -> Int {
+        return self.items.reduce(0, { res, item in
+            res + item.count
+        })
     }
 }
 

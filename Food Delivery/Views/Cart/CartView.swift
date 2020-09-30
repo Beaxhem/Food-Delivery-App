@@ -19,16 +19,17 @@ struct CartView: View {
                     CartListView()
                 }
             }
-            .frame(width: 75, height: 75)
-            .background(Color.blue)
-            .cornerRadius(37.5)
+           
+            
+            
+            
             .shadow(color: .blue, radius: 1)
     }
 }
 
 struct CartListView: View {
     @EnvironmentObject var cart: Cart
-    @EnvironmentObject var partialSheet : PartialSheetManager
+    @EnvironmentObject var sheetManager : SheetManager
     
     public var body: some View {
         VStack {
@@ -39,7 +40,7 @@ struct CartListView: View {
                     .foregroundColor(.black)
                     .onTapGesture {
                         withAnimation {
-                            partialSheet.closePartialSheet()
+                            sheetManager.hideSheet()
                         }
                     }
             }
@@ -56,11 +57,17 @@ struct CartListView: View {
 }
 
 struct CartButtonView: View {
+    @EnvironmentObject var cart: Cart
+    
     public var body: some View {
-        ZStack {
+        BadgeView(value: cart.count()) {
             Image(systemName: "bag.fill")
+                .frame(width: 75, height: 75)
+                .background(Color.blue)
                 .foregroundColor(.white)
                 .font(.largeTitle)
+                .cornerRadius(37.5)
+            
         }
     }
 }

@@ -37,6 +37,10 @@ class SheetManager: ObservableObject {
         })
     }
     
+    func hideSheet() {
+        self.sheetManager?.closePartialSheet()
+    }
+    
     func setManager(manager: PartialSheetManager) -> SheetManager {
         self.sheetManager = manager
         

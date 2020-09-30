@@ -11,7 +11,8 @@ import PartialSheet
 struct ProductCellView: View {
     var product: Product
     
-    @EnvironmentObject var settings : SheetManager
+    @EnvironmentObject var sheetManager : SheetManager
+    @EnvironmentObject var cart: Cart
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,7 +29,7 @@ struct ProductCellView: View {
         }
         .onTapGesture {
             
-            self.settings.showPartialSheet(style: addToCartSheetStyle) {
+            self.sheetManager.showPartialSheet(style: addToCartSheetStyle) {
                 ProductActionView(product: product, callback: {
                     addToCart()
                 })
@@ -41,7 +42,11 @@ struct ProductCellView: View {
     }
     
     func addToCart() {
+        cart.addToCart(item: product)
         
+        withAnimation {
+            sheetManager.hideSheet()
+        }
     }
 }
 
