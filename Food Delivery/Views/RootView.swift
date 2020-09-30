@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct RootView: View {
     @State private var selectedIndex: Int = 0
     
     init() {
         UITabBar.appearance().barTintColor  = UIColor.white
-        
     }
+    
+    @EnvironmentObject var settings: SheetManager
     
     var body: some View {
     
@@ -40,19 +42,7 @@ struct RootView: View {
         }
         .accentColor(.black)
         .background(Color.white)
-        .addPartialSheet()
-         
-//        .ifTrue(settings.isAddToCartMenuOpened) {
-//            AnyView($0.addPartialSheet(style: self.addToCartSheetStyle))
-////            AnyView($0.partialSheet(isPresented: .constant(true), content: settings.content))
-//        }
-//        .ifTrue(settings.isCartOpened) {
-//            AnyView($0.addPartialSheet(style: self.cartSheetStyle))
-//        }
-//        .addPartialSheet(style: settings.isAddToCartMenuOpened ? self.addToCartSheetStyle : self.cartSheetStyle)
-        
-        
-        
+        .addPartialSheet(style: settings.style)        
     }
 }
 

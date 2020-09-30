@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct CartView: View {
     @Binding var isOpened: Bool
-    @EnvironmentObject var partialSheet : CustomPartialSheetManager
+    @EnvironmentObject var settings : SheetManager
     
     var body: some View {
         CartButtonView()
             .onTapGesture {
-                self.partialSheet.showPartialSheet({}, style: cartSheetStyle) {
+                self.settings.showPartialSheet {
                     CartListView()
                 }
             }
@@ -27,7 +28,7 @@ struct CartView: View {
 
 struct CartListView: View {
     @EnvironmentObject var cart: Cart
-    @EnvironmentObject var partialSheet : CustomPartialSheetManager
+    @EnvironmentObject var partialSheet : PartialSheetManager
     
     public var body: some View {
         VStack {
