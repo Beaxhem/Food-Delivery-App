@@ -20,5 +20,53 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A90765C0-8001-4933-B229-B2705902612D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Food Delivery/Views/Cart/CartView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "CartButtonView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "A90765C0-8001-4933-B229-B2705902612D - 8ce3e3783f12d82a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Food_Delivery.CartButtonView.init() -&gt; Food_Delivery.CartButtonView"
+                  moduleName = "Food Delivery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilyasenchukov/Desktop/projects/Food%20Delivery/Food%20Delivery/Views/Cart/CartView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "49">
+               </Location>
+               <Location
+                  uuid = "A90765C0-8001-4933-B229-B2705902612D - f8e34f76dd765dfd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Food_Delivery.CartButtonView.init(cart: SwiftUI.EnvironmentObject&lt;Food_Delivery.Cart&gt;) -&gt; Food_Delivery.CartButtonView"
+                  moduleName = "Food Delivery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilyasenchukov/Desktop/projects/Food%20Delivery/Food%20Delivery/Views/Cart/CartView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

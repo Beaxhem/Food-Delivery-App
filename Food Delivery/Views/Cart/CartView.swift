@@ -19,10 +19,6 @@ struct CartView: View {
                     CartListView()
                 }
             }
-           
-            
-            
-            
             .shadow(color: .blue, radius: 1)
     }
 }
@@ -44,9 +40,10 @@ struct CartListView: View {
                         }
                     }
             }
+            .offset(y: -15)
             
             ForEach(cart.items) { item in
-                Text(item.product.name)
+                CartItemView(item: item)
             }
             
             Spacer()

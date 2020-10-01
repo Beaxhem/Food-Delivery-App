@@ -29,4 +29,15 @@ class Product: Identifiable {
         self.imageName = ""
         self.category = ""
     }
+    
+    static func defaultProduct() -> Product {
+        let product = Product()
+        
+        product.category = "Test category"
+        product.imageName = "mcdonalds"
+        product.name = "Test name"
+        product.price = 99.7
+        
+        return product
+    }
 }

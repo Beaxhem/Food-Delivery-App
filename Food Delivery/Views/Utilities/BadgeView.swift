@@ -23,7 +23,7 @@ struct BadgeView<Content: View>: View {
                         .overlay(Text(String(value))
                                     .foregroundColor(.white)
                                 )
-                        .position(x: geometry.size.width - 15, y: geometry.size.height - 15)
+                        .position(x: geometry.size.width - 15, y: 15)
                 }
             }
         }

@@ -11,6 +11,10 @@ struct CompanyDetails: View {
     var company: Company
     
     @State var isCartOpened = false
+    @State var showAlertView = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var cart: Cart
     
     var body: some View {
         ZStack {
@@ -61,9 +65,30 @@ struct CompanyDetails: View {
             }
             
         }
+        .navigationBarItems(leading: Text("Back to browsing")
+                                .onTapGesture(perform: onLeave))
+        .navigationBarBackButtonHidden(true)
         
+        .alert(isPresented: $showAlertView) {
+            Alert(title: Text("Are you sure you want to leave?"), message: Text("You will lose your cart items"),primaryButton: .cancel(Text("Ok"), action: {
+                leave()
+            }), secondaryButton: .default(Text("Leave here")))
+        }
 
-        
+    }
+    
+    func onLeave() {
+        if cart.count() > 0 {
+            showAlertView = true
+            
+        } else {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    func leave() {
+        cart.items = []
+        presentationMode.wrappedValue.dismiss()
     }
             
 }
