@@ -12,6 +12,8 @@ struct CartView: View {
     @Binding var isOpened: Bool
     @EnvironmentObject var settings : SheetManager
     
+    
+    
     var body: some View {
         CartButtonView()
             .onTapGesture {
@@ -27,6 +29,8 @@ struct CartListView: View {
     @EnvironmentObject var cart: Cart
     @EnvironmentObject var sheetManager : SheetManager
     
+    @State var coupon: String = ""
+    
     public var body: some View {
         VStack {
             HStack {
@@ -41,14 +45,96 @@ struct CartListView: View {
                     }
             }
             .offset(y: -15)
-            
-            ForEach(cart.items) { item in
-                CartItemView(item: item)
+            ScrollView {
+                VStack(spacing: 30) {
+                    
+                    
+                    ForEach(cart.getItems()) { item in
+                        CartItemView(id: item.id)
+                    }
+                    Divider()
+                    
+                    HStack {
+                        TextField("Promo code", text: $coupon)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Button(action: {
+                            
+                        }) {
+                            Text("Apply")
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 8)
+                                .background(Color.blue)
+                                .cornerRadius(7)
+                        }
+                    }
+                    
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Line()
+                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
+                            .fill(Color.gray)
+                            .frame(height: 1)
+                        
+                        HStack {
+                            Text("Delivery")
+                                .bold()
+                            
+                            Spacer()
+                            
+                            Text("9.0$")
+                        }
+                        
+                        HStack {
+                            Text("Fee")
+                                .bold()
+                            
+                            Spacer()
+                            
+                            Text("0.9$")
+                        }
+                        
+                        HStack {
+                            Text("Total")
+                                .bold()
+                            
+                            Spacer()
+                            
+                            Text("99.0$")
+                        }
+                        
+                        Line()
+                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
+                            .fill(Color.gray)
+                            .frame(height: 1)
+                    }
+                    .padding(8)
+                    .background(Color.white)
+                    .shadow(radius: 3)
+                    
+                    Button(action: {
+                            
+                        }) {
+                            Text("Checkout")
+                                .foregroundColor(.white)
+                                .bold()
+                                .frame(minWidth: 0,
+                                                maxWidth: .infinity)
+                        }
+                        .padding(.vertical, 20)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    
+                                        
+                    
+                    Spacer()
+                }
+                .padding()
             }
-            
-            Spacer()
         }
-        .padding()
+        
+        
         
     }
 }

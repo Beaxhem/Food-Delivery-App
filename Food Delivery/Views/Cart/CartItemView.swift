@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct CartItemView: View {
-    var item: CartItem
+    @EnvironmentObject var cart: Cart
+    var id: UUID
+    var item: CartItem {
+        return cart.items[id]!
+    }
     
     var body: some View {
         HStack {
@@ -20,27 +24,20 @@ struct CartItemView: View {
                 HStack {
                     Text(item.product.name)
                         .bold()
-                    
-                    Text(String(item.getTotalPrice()) + "$")
-                        .font(.title)
-                        .bold()
                 }
-                
                 
                 Text(item.product.category)
                     .font(.callout)
             }
             Spacer()
             
-            
-            VStack {
+            VStack(spacing: 10) {
                 Text("Qty.")
                     .font(.caption)
                 
-                HStack {
-                    
+                HStack(spacing: 0) {
                     Button(action: {
-                        item.count += 1
+                        self.increment()
                     }) {
                         Text("+")
                             .bold()
@@ -53,9 +50,10 @@ struct CartItemView: View {
                     Text("\(item.count)")
                         .font(.headline)
                         .bold()
+                        .frame(width: 35)
                     
                     Button(action: {
-                        item.count -= 1
+                        self.decrement()
                     }) {
                         Text("-")
                             .bold()
@@ -66,15 +64,27 @@ struct CartItemView: View {
                     .cornerRadius(4)
                     
                 }
+                
+                Text(String(format: "%.2f", item.getTotalPrice()) + "$")
+                    .font(.title2)
+                    .bold()
             }
             
         }
+    }
+    
+    func increment() {
+        cart.increment(id: item.id)
+    }
+    
+    func decrement() {
+        cart.decrement(id: item.id)
     }
     
 }
 
 struct CartItem_Previews: PreviewProvider {
     static var previews: some View {
-        CartItemView(item: CartItem(product: Product.defaultProduct()))
+        CartItemView(id: CartItem(product: Product.defaultProduct()).id)
     }
 }

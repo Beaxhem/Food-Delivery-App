@@ -10,7 +10,7 @@ import PartialSheet
 
 @main
 struct Food_DeliveryApp: App {
-    var cart = Cart(items: [CartItem(product: Product.defaultProduct())])
+    var cart = Cart()
     var sheetManager = PartialSheetManager()
     var settings = SheetManager()
     

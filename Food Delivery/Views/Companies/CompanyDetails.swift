@@ -87,7 +87,7 @@ struct CompanyDetails: View {
     }
     
     func leave() {
-        cart.items = []
+        cart.items = [:]
         presentationMode.wrappedValue.dismiss()
     }
             
