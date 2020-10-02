@@ -9,10 +9,8 @@ import SwiftUI
 
 struct CartItemView: View {
     @EnvironmentObject var cart: Cart
-    var id: UUID
-    var item: CartItem {
-        return cart.items[id]!
-    }
+    var item: CartItem
+    
     
     var body: some View {
         HStack {
@@ -73,18 +71,30 @@ struct CartItemView: View {
         }
     }
     
+    
     func increment() {
-        cart.increment(id: item.id)
+        saveChangesToCart {
+            self.cart.increment(id: item.id)
+        }
+       
+        
     }
     
     func decrement() {
-        cart.decrement(id: item.id)
+        saveChangesToCart {
+            self.cart.decrement(id: item.id)
+        }
+    }
+    
+    func saveChangesToCart(fun: () -> Void) {
+        fun()
+        self.cart.items = cart.items
     }
     
 }
 
 struct CartItem_Previews: PreviewProvider {
     static var previews: some View {
-        CartItemView(id: CartItem(product: Product.defaultProduct()).id)
+        CartItemView(item: CartItem(product: Product.defaultProduct()))
     }
 }

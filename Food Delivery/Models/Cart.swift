@@ -38,6 +38,10 @@ class Cart: ObservableObject {
         return total
     }
     
+    func isEmpty() -> Bool {
+        return self.items.isEmpty
+    }
+    
     func count() -> Int {
         return self.items.reduce(0, { res, row in
             res + row.value.count

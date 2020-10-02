@@ -31,6 +31,10 @@ struct CartListView: View {
     
     @State var coupon: String = ""
     
+    let delivery: Float = 14.2
+    let fee: Float = 5.42
+    @State var discount: Float = 0.0
+    
     public var body: some View {
         VStack {
             HStack {
@@ -45,97 +49,134 @@ struct CartListView: View {
                     }
             }
             .offset(y: -15)
-            ScrollView {
-                VStack(spacing: 30) {
-                    
-                    
-                    ForEach(cart.getItems()) { item in
-                        CartItemView(id: item.id)
-                    }
-                    Divider()
-                    
-                    HStack {
-                        TextField("Promo code", text: $coupon)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            if !cart.isEmpty() {
+                ScrollView {
+                    VStack(spacing: 30) {
+                        
+                        
+                        ForEach(cart.getItems()) { item in
+                            CartItemView(item: item)
+                        }
+                        Divider()
+                        
+                        HStack {
+                            TextField("Promo code", text: $coupon)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            Button(action: {
+                                processPromoCode()
+                            }) {
+                                Text("Apply")
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 8)
+                                    .background(Color.blue)
+                                    .cornerRadius(7)
+                            }
+                        }
+                        
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            Line()
+                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
+                                .fill(Color.gray)
+                                .frame(height: 1)
+                            
+                            HStack {
+                                Text("Products")
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Text("\(format(float: cart.totalSum()))$")
+                            }
+                            
+                            HStack {
+                                Text("Delivery")
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Text("\(format(float: delivery))$")
+                            }
+                            
+                            HStack {
+                                Text("Fee")
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Text("\(format(float: fee))$")
+                            }
+                            
+                            HStack {
+                                Text("Discount")
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Text("\(format(float: discount))$")
+                                    .foregroundColor(.green)
+                            }
+                            
+                            HStack {
+                                Text("Total")
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Text("\(format(float: total()))$")
+                            }
+                            
+                            Line()
+                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
+                                .fill(Color.gray)
+                                .frame(height: 1)
+                        }
+                        .padding(8)
+                        .background(Color.white)
+                        .shadow(radius: 3)
                         
                         Button(action: {
-                            
-                        }) {
-                            Text("Apply")
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 8)
-                                .background(Color.blue)
-                                .cornerRadius(7)
-                        }
+                                
+                            }) {
+                                Text("Checkout")
+                                    .foregroundColor(.white)
+                                    .bold()
+                                    .frame(minWidth: 0,
+                                                    maxWidth: .infinity)
+                            }
+                            .padding(.vertical, 20)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
+                                            
+                        
+                        Spacer()
                     }
-                    
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Line()
-                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
-                            .fill(Color.gray)
-                            .frame(height: 1)
-                        
-                        HStack {
-                            Text("Delivery")
-                                .bold()
-                            
-                            Spacer()
-                            
-                            Text("9.0$")
-                        }
-                        
-                        HStack {
-                            Text("Fee")
-                                .bold()
-                            
-                            Spacer()
-                            
-                            Text("0.9$")
-                        }
-                        
-                        HStack {
-                            Text("Total")
-                                .bold()
-                            
-                            Spacer()
-                            
-                            Text("99.0$")
-                        }
-                        
-                        Line()
-                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
-                            .fill(Color.gray)
-                            .frame(height: 1)
-                    }
-                    .padding(8)
-                    .background(Color.white)
-                    .shadow(radius: 3)
-                    
-                    Button(action: {
-                            
-                        }) {
-                            Text("Checkout")
-                                .foregroundColor(.white)
-                                .bold()
-                                .frame(minWidth: 0,
-                                                maxWidth: .infinity)
-                        }
-                        .padding(.vertical, 20)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                    
-                                        
-                    
-                    Spacer()
+                    .padding()
                 }
-                .padding()
+            } else {
+                Text("Empty cart")
+            }
+        }
+    }
+    
+    func processPromoCode() {
+        if discount == 0.0 {
+            if coupon == "MAX" {
+                self.discount += cart.totalSum() * 0.05
             }
         }
         
-        
-        
+    }
+    
+    func format(float: Float) -> String {
+        return String(format: "%.2f", float)
+    }
+    func total() -> Float {
+        return self.delivery + self.fee + self.cart.totalSum() - self.discount
     }
 }
 
