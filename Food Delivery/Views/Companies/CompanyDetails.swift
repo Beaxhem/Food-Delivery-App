@@ -18,43 +18,56 @@ struct CompanyDetails: View {
     
     var body: some View {
         ZStack {
-            
-            ScrollView {
-                VStack(alignment: .leading) {
-                    
-                    ZStack() {
-                    
-                        Image(company.imageName)
-                            .resizable()
-                            .frame(height: 250)
-                            .blur(radius: 0)
-                        
-                        Rectangle()
-                            .frame(height: 250)
-                            .background(Color.gray.opacity(0.01))
-                            .opacity(0.2)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(company.name)
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        ZStack(alignment: .bottom) {
+                            Image(company.imageName)
+                                .resizable()
+                                .frame(height: 250)
+                                .cornerRadius(40, corners: [.bottomLeft, .bottomRight])
                             
-                            Text("1231 St.,San Francisco, LA")
-                                .font(.callout)
-                                .foregroundColor(.white)
-                            
-                            RatingView(rating: 4.7)
-                            
-                        }.position(x: 220, y: 195)
-                    
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text(company.name)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                                
+                                Text("1231 St.,San Francisco, LA")
+                                    .font(.callout)
+                                    .foregroundColor(.black)
+                                
+                                RatingView(rating: 4.7)
+                            }
+                            .frame(width: geometry.size.width * 0.8)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 3)
+                            .alignmentGuide(.bottom) { d in d[.bottom] / 2 }
+                        }
+                        ProductsListView(companyID: company.id)
                         
+                        Spacer()
                     }
-                    ProductsListView(companyID: company.id)
-                    
-                    Spacer()
                 }
             }.edgesIgnoringSafeArea(.top)
+            
+            GeometryReader { geometry in
+                VStack {
+                    Image(systemName: "chevron.left")
+                        .resizable()
+                        .frame(width: 10, height: 15)
+                        .font(.system(size: 15, weight: .bold))
+                }
+                .frame(width: 50, height: 50)
+                .background(Color.white)
+                .cornerRadius(25)
+                .position(x: 35, y: 25)
+                .onTapGesture {
+                    onLeave()
+                }
+            }
             
             GeometryReader { geometry in
                 CartView(isOpened: $isCartOpened)
@@ -64,17 +77,16 @@ struct CompanyDetails: View {
                 
             }
             
+            
         }
-        .navigationBarItems(leading: Text("Back to browsing")
-                                .onTapGesture(perform: onLeave))
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         
         .alert(isPresented: $showAlertView) {
             Alert(title: Text("Are you sure you want to leave?"), message: Text("You will lose your cart items"),primaryButton: .cancel(Text("Ok"), action: {
                 leave()
             }), secondaryButton: .default(Text("Leave here")))
         }
-
+        
     }
     
     func onLeave() {
@@ -90,7 +102,7 @@ struct CompanyDetails: View {
         cart.items = [:]
         presentationMode.wrappedValue.dismiss()
     }
-            
+    
 }
 
 struct CompanyDetails_Previews: PreviewProvider {

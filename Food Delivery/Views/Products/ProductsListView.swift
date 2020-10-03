@@ -17,7 +17,7 @@ struct ProductsListView: View {
     
     var body: some View {
         Group {
-            CategoryListView(categories: Array(self.groups.keys), selected: $selectedCategory)
+            CategoryListView(categories: Array(self.groups.keys).sorted(by: > ), selected: $selectedCategory)
             
             VStack(alignment: .leading) {
                 if self.selectedCategory == "" {
@@ -27,17 +27,7 @@ struct ProductsListView: View {
                             .fontWeight(.bold)
                         
                         ForEach(getIndices(of: groups[key]!), id: \.self) { idx in
-                            HStack {
-                                ProductCellView(product: groups[key]![idx])
-                                    
-                                
-                                Spacer()
-                                if groups[key]!.indices.contains(idx + 1) {
-                                    ProductCellView(product: groups[key]![idx + 1])
-                                       
-                                }
-
-                            }
+                            GroupView(group: groups[key]!, idx: idx)
                         }.transition(.move(edge: .bottom))
                         
                     }.padding(.bottom)
@@ -47,15 +37,7 @@ struct ProductsListView: View {
                         .fontWeight(.bold)
                     
                     ForEach(getIndices(of: groups[selectedCategory]!), id: \.self) { idx in
-                        HStack {
-                            ProductCellView(product: groups[selectedCategory]![idx])
-                            
-                            Spacer()
-                            if groups[selectedCategory]!.indices.contains(idx + 1) {
-                                ProductCellView(product: groups[selectedCategory]![idx + 1])
-                            }
-
-                        }
+                        GroupView(group: groups[selectedCategory]!, idx: idx)
                     }
                 }
                 

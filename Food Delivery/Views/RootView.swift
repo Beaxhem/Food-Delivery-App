@@ -22,15 +22,15 @@ struct RootView: View {
         TabView(selection: $selectedIndex) {
             CompaniesView()
                 .tabItem {
-                    Image(systemName: "figure.wave")
-                    Text("Order")
+                    Image(systemName: "house.fill")
+                    Text("Restaurants")
                 }
                 .tag(0)
                 
             CompaniesView()
                 .tabItem {
-                    Image(systemName: "map.fill")
-                    Text("On map")
+                    Image(systemName: "heart.text.square")
+                    Text("Orders")
                 }
                 .tag(0)
             CompaniesView()
