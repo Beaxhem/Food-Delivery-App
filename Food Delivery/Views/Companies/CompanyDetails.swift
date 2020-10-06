@@ -28,16 +28,18 @@ struct CompanyDetails: View {
                                 .cornerRadius(40, corners: [.bottomLeft, .bottomRight])
                             
                             VStack(alignment: .leading, spacing: 10) {
-                                Text(company.name)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black)
+                                HStack {
+                                    Text(company.name)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.black)
+                                    
+                                    RatingView(rating: 4.7)
+                                }
                                 
                                 Text("1231 St.,San Francisco, LA")
                                     .font(.callout)
                                     .foregroundColor(.black)
-                                
-                                RatingView(rating: 4.7)
                             }
                             .frame(width: geometry.size.width * 0.8)
                             .padding()
@@ -80,7 +82,9 @@ struct CompanyDetails: View {
             
         }
         .navigationBarHidden(true)
-        
+        .onAppear {
+            cart.source = company.name
+        }
         .alert(isPresented: $showAlertView) {
             Alert(title: Text("Are you sure you want to leave?"), message: Text("You will lose your cart items"),primaryButton: .cancel(Text("Ok"), action: {
                 leave()

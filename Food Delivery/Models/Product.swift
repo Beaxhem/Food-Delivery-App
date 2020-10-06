@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Product: Identifiable {
+class Product: Identifiable, Encodable {
     var id: UUID
     var name: String
     var price: Float
@@ -30,6 +30,16 @@ class Product: Identifiable {
         self.category = ""
     }
     
+    static func from(dict: [String: Any]) -> Product {
+        let product = Product()
+        
+        product.category = dict["category"] as! String
+        product.imageName = dict["imageName"] as! String
+        product.name = dict["name"] as! String
+        product.price = dict["price"] as! Float
+        
+        return product
+    }
     static func defaultProduct() -> Product {
         let product = Product()
         

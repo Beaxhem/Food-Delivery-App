@@ -9,40 +9,52 @@ import SwiftUI
 import PartialSheet
 
 struct RootView: View {
-    @State private var selectedIndex: Int = 0
+    @EnvironmentObject var tabController: TabController
+    @EnvironmentObject var settings: SheetManager
+    @EnvironmentObject var hudController: HUDController
     
     init() {
         UITabBar.appearance().barTintColor  = UIColor.white
     }
     
-    @EnvironmentObject var settings: SheetManager
-    
     var body: some View {
-    
-        TabView(selection: $selectedIndex) {
-            CompaniesView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Restaurants")
-                }
-                .tag(0)
-                
-            CompaniesView()
-                .tabItem {
-                    Image(systemName: "heart.text.square")
-                    Text("Orders")
-                }
-                .tag(0)
-            CompaniesView()
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
-                .tag(0)
+        ProgressHUDView(isShowing: hudController.isShowing, text: hudController.text, afterDelay: hudController.delay) {
+            TabView(selection: $tabController.selectedIndex) {
+                CompaniesView()
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Restaurants")
+                    }
+                    .tag(0)
+                    
+                OrdersView()
+                    .tabItem {
+                        Image(systemName: "heart.text.square")
+                        Text("Orders")
+                    }
+                    .tag(1)
+                CompaniesView()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
+                    .tag(2)
+            }
+            .accentColor(.black)
+            .background(Color.white)
+            
+            .addPartialSheet(style: settings.style)
         }
-        .accentColor(.black)
-        .background(Color.white)
-        .addPartialSheet(style: settings.style)        
+         
+    }
+}
+
+class TabController: ObservableObject {
+    @Published var selectedIndex = 0
+    
+    func setTab(index: Int) {
+        self.selectedIndex = index
+        print(self.selectedIndex)
     }
 }
 

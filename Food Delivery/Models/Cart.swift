@@ -8,14 +8,17 @@
 import SwiftUI
 
 class Cart: ObservableObject {
+    @Published var source: String
     @Published var items: [UUID: CartItem]
     
     init() {
         self.items = [:]
+        self.source = ""
     }
     
-    init(items: [UUID: CartItem]) {
+    init(items: [UUID: CartItem], source: String) {
         self.items = items
+        self.source = ""
     }
     
     func getItems() -> [CartItem] {
@@ -25,6 +28,10 @@ class Cart: ObservableObject {
     func addToCart(item: Product) {
         let cartItem = CartItem(product: item)
         self.items[cartItem.id] = cartItem
+    }
+    
+    func deleteFromCart(id: UUID) {
+        items.remove(at: items.index(forKey: id)!)
     }
     
     func totalSum() -> Float {
@@ -57,15 +64,29 @@ class Cart: ObservableObject {
     }
 }
 
-class CartItem: Identifiable {
+class CartItem: Identifiable, Encodable {
     var id: UUID
     var product: Product
     var count: Int
     
+    init() {
+        self.id = UUID()
+        self.product = Product()
+        self.count = 1
+    }
     init(product: Product, count: Int = 1) {
         self.id = UUID()
         self.product = product
         self.count = count
+    }
+    
+    static func from(dict: [String: Any]) -> CartItem {
+        let item = CartItem()
+        
+        item.count = dict["count"] as! Int
+        item.product = Product.from(dict: dict["product"] as! [String: Any])
+        
+        return item
     }
     
     func getTotalPrice() -> Float {

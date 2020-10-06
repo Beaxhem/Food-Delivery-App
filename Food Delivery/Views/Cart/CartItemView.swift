@@ -11,7 +11,6 @@ struct CartItemView: View {
     @EnvironmentObject var cart: Cart
     var item: CartItem
     
-    
     var body: some View {
         HStack {
             Image(item.product.imageName)
@@ -68,16 +67,29 @@ struct CartItemView: View {
                     .bold()
             }
             
+            Image(systemName: "multiply")
+                .resizable()
+                .frame(width: 10, height: 10)
+                .foregroundColor(.gray)
+                .padding(10)
+                .onTapGesture {
+                    deleteFromCart()
+                }
         }
     }
     
+    func deleteFromCart() {
+        saveChangesToCart {
+            withAnimation {
+                cart.deleteFromCart(id: item.id)
+            }
+        }
+    }
     
     func increment() {
         saveChangesToCart {
             self.cart.increment(id: item.id)
         }
-       
-        
     }
     
     func decrement() {

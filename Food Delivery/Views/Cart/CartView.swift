@@ -7,12 +7,11 @@
 
 import SwiftUI
 import PartialSheet
+import JGProgressHUD
 
 struct CartView: View {
     @Binding var isOpened: Bool
     @EnvironmentObject var settings : SheetManager
-    
-    
     
     var body: some View {
         CartButtonView()
@@ -28,7 +27,12 @@ struct CartView: View {
 struct CartListView: View {
     @EnvironmentObject var cart: Cart
     @EnvironmentObject var sheetManager : SheetManager
-    
+    @EnvironmentObject var tabController: TabController
+    @EnvironmentObject var hudController: HUDController
+        
+    var hud = JGProgressHUD(style: .dark)
+
+
     @State var coupon: String = ""
     
     let delivery: Float = 14.2
@@ -40,7 +44,8 @@ struct CartListView: View {
             HStack {
                 Spacer()
                 Image(systemName: "multiply")
-                    .frame(width: 30, height: 30)
+                    .resizable()
+                    .frame(width: 15, height: 15)
                     .foregroundColor(.black)
                     .onTapGesture {
                         withAnimation {
@@ -48,7 +53,7 @@ struct CartListView: View {
                         }
                     }
             }
-            .offset(y: -15)
+            .offset(x: -25, y: -5)
             
             if !cart.isEmpty() {
                 ScrollView {
@@ -78,11 +83,6 @@ struct CartListView: View {
                         
                         
                         VStack(alignment: .leading, spacing: 10) {
-                            Line()
-                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
-                                .fill(Color.gray)
-                                .frame(height: 1)
-                            
                             HStack {
                                 Text("Products")
                                     .bold()
@@ -120,6 +120,11 @@ struct CartListView: View {
                                     .foregroundColor(.green)
                             }
                             
+                            Line()
+                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
+                                .fill(Color.gray)
+                                .frame(height: 1)
+                            
                             HStack {
                                 Text("Total")
                                     .bold()
@@ -129,27 +134,20 @@ struct CartListView: View {
                                 Text("\(format(float: total()))$")
                             }
                             
-                            Line()
-                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [3.5]))
-                                .fill(Color.gray)
-                                .frame(height: 1)
+                            
                         }
                         .padding(8)
                         .background(Color.white)
+                        .cornerRadius(10)
                         .shadow(radius: 3)
                         
                         Button(action: {
-                                
-                            }) {
-                                Text("Checkout")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .frame(minWidth: 0,
-                                                    maxWidth: .infinity)
-                            }
-                            .padding(.vertical, 20)
-                            .background(Color.blue)
-                            .cornerRadius(10)
+                            order()
+                        }) {
+                            Text("Checkout")
+                                .modifier(BigButtonStyle())
+                        }
+                            
                         
                                             
                         
@@ -159,6 +157,26 @@ struct CartListView: View {
                 }
             } else {
                 Text("Empty cart")
+            }
+        }
+    }
+    
+    func order() {
+        let order = Order(items: cart.getItems(), totalPrice: total(), deliveryDestination: "Test", source: cart.source)
+        
+        DatabaseManager.shared.createOrder(order: order) { err in
+            if let err = err {
+                print(err)
+            } else {
+                self.tabController.setTab(index: 1)
+                self.cart.items = [:]
+                
+                hudController.show(text: "Your order will be processed in a minute", afterDelay: 3)
+                withAnimation {
+                    self.sheetManager.hideSheet()
+                }
+                
+                
             }
         }
     }

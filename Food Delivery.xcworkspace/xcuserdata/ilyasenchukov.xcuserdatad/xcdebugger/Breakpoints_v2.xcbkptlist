@@ -30,14 +30,14 @@
             filePath = "Food Delivery/Views/Cart/CartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "CartButtonView"
             landmarkType = "14">
             <Locations>
                <Location
-                  uuid = "A90765C0-8001-4933-B229-B2705902612D - 8ce3e3783f12d82a"
-                  shouldBeEnabled = "Yes"
+                  uuid = "A90765C0-8001-4933-B229-B2705902612D - 8ce3e3783f12eb81"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Food_Delivery.CartButtonView.init() -&gt; Food_Delivery.CartButtonView"
@@ -46,13 +46,13 @@
                   urlString = "file:///Users/ilyasenchukov/Desktop/projects/Food%20Delivery/Food%20Delivery/Views/Cart/CartView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
                   offsetFromSymbolStart = "49">
                </Location>
                <Location
                   uuid = "A90765C0-8001-4933-B229-B2705902612D - f8e34f76dd765dfd"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Food_Delivery.CartButtonView.init(cart: SwiftUI.EnvironmentObject&lt;Food_Delivery.Cart&gt;) -&gt; Food_Delivery.CartButtonView"

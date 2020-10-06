@@ -11,10 +11,19 @@ class Company: Identifiable {
     var id: UUID
     var name: String
     var imageName: String
+    var logoName: String
     
-    init(name: String, imageName: String) {
+    init() {
+        self.id = UUID()
+        self.name = ""
+        self.imageName = ""
+        self.logoName = ""
+    }
+    
+    init(name: String, imageName: String = "mcdonalds", logoName: String = "mcdonalds_logo") {
         self.id = UUID()
         self.name = name
         self.imageName = imageName
+        self.logoName = logoName
     }
 }
