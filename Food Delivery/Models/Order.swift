@@ -13,6 +13,7 @@ class Order: Encodable, Identifiable {
     var deliveryDestination: String
     var status: Status = .waiting
     var source: String
+    var date: Date
     
     init() {
         self.id = UUID()
@@ -20,6 +21,7 @@ class Order: Encodable, Identifiable {
         self.totalPrice = 0
         self.deliveryDestination = ""
         self.source = ""
+        self.date = Date()
     }
     
     init(items: [CartItem], totalPrice: Float, deliveryDestination: String, source: String) {
@@ -28,6 +30,7 @@ class Order: Encodable, Identifiable {
         self.totalPrice = totalPrice
         self.deliveryDestination = deliveryDestination
         self.source = source
+        self.date = Date()
     }
     
     static func from(dict: [String: Any]) -> Order {

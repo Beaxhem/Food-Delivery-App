@@ -12,40 +12,59 @@ struct OrderCellView: View {
     
     @State var company: Company = Company()
     
+    let dateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm dd/MM/yyyy "
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(company.logoName)
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                
-                Text(order.source)
-                    .font(.headline)
-                
-                Spacer()
-                
-                Image(systemName: "multiply")
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .foregroundColor(.gray)
+            
+                HStack {
+                    Image(company.logoName)
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                            HStack {
+                                Text(order.source)
+                                    .font(.headline)
+                                
+                                Text("•")
+                                
+                                Text(order.status.rawValue.capitalized)
+                            }
+                            
+                            
+                            Spacer()
+                            
+                            Image(systemName: "multiply")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.gray)
+                        }
+                        Text("\(order.date, formatter: self.dateFormat)")
+                            .font(.caption)
+                    }
             }
+            VStack(spacing: 15) {
+                HStack {
+                    Text("Destination")
+                        .bold()
+                    Spacer()
+                    Text(order.deliveryDestination)
+                }
             
-            HStack {
-                Text("Destination")
-                    .bold()
-                Spacer()
-                Text(order.deliveryDestination)
-            }
-            .padding(.bottom)
-            
-            HStack {
-                Text("Payment")
-                    .bold()
-                Spacer()
-                Text("Credit card")
-            }.padding(.bottom)
-            
-            
+                
+                HStack {
+                    Text("Payment")
+                        .bold()
+                    Spacer()
+                    Text("Credit card")
+                }
+                
                 HStack {
                     Text("View details")
                         .foregroundColor(.white)
@@ -60,8 +79,7 @@ struct OrderCellView: View {
                         .font(.title2)
                         .bold()
                 }
-            
-            
+            }.padding(.top)
             
         }
         .frame(minWidth: 0, maxWidth: .infinity)

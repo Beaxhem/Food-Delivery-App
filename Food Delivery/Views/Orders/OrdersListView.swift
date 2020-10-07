@@ -10,16 +10,12 @@ import SwiftUI
 struct OrdersListView: View {
     var orders: [Order]
     
-    
-    
     var body: some View {
         ForEach(self.orders) { order in
             OrderCellView(order: order)
         }
-        
+        .padding(.top)
     }
-    
-    
 }
 
 struct OrdersListView_Previews: PreviewProvider {
