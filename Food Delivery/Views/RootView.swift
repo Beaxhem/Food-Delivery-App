@@ -12,10 +12,7 @@ struct RootView: View {
     @EnvironmentObject var tabController: TabController
     @EnvironmentObject var settings: SheetManager
     @EnvironmentObject var hudController: HUDController
-    
     @ObservedObject var auth = AuthenticationState()
-    
-    
     
     init() {
         UITabBar.appearance().barTintColor  = UIColor.white
@@ -50,7 +47,7 @@ struct RootView: View {
                 .background(Color.white)
                 .addPartialSheet(style: settings.style)
                 .fullScreenCover(isPresented: $auth.isNotLoggedIn) {
-                    LoginPageView()
+                    RegisterPageView()
                         .environmentObject(auth)
                 }
         

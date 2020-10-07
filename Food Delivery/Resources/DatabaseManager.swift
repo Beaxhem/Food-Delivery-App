@@ -95,4 +95,24 @@ class DatabaseManager {
         }
         
     }
+    
+    func createUser(user: Customer, completion: @escaping (Error?) -> Void) {
+        guard let data = user.getDict() else {
+            return
+        }
+        
+        db.collection("users").document(user.email).setData(data, completion: completion)
+    }
+    
+    func getUser(email: String, completion: @escaping (Result<Customer, Error>) -> Void) {
+        db.collection("users").document(email).getDocument { (document, error) in
+            if let error = error {
+                print(error)
+            } else {
+                let data = document?.data() as [String: String]
+                let user = Customer.from(dict: data)
+                completion(.success(user))
+            }
+        }
+    }
 }
