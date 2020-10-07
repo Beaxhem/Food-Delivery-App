@@ -54,12 +54,12 @@ struct ProgressHUD: UIViewControllerRepresentable {
 }
 
 public struct ProgressHUDView<Content>: View where Content: View {
-    private var isShowing: Bool
+    private var isShowing: Binding<Bool>
     private var content: () -> Content
     private var text: String
     private var delay: TimeInterval?
     
-    init(isShowing: Bool, text: String, afterDelay delay: TimeInterval? = nil, content: @escaping () -> Content) {
+    init(isShowing: Binding<Bool>, text: String, afterDelay delay: TimeInterval? = nil, content: @escaping () -> Content) {
         self.isShowing = isShowing
         self.content = content
         self.text = text
@@ -68,7 +68,7 @@ public struct ProgressHUDView<Content>: View where Content: View {
     
     public var body: some View {
         ZStack(alignment: .center) {
-            if (!self.isShowing) {
+            if (!self.isShowing.wrappedValue) {
                 self.content()
             } else {
                 self.content()

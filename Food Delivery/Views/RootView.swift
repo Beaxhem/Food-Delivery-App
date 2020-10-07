@@ -13,38 +13,52 @@ struct RootView: View {
     @EnvironmentObject var settings: SheetManager
     @EnvironmentObject var hudController: HUDController
     
+    @ObservedObject var auth = AuthenticationState()
+    
+    
+    
     init() {
         UITabBar.appearance().barTintColor  = UIColor.white
     }
     
     var body: some View {
-        ProgressHUDView(isShowing: hudController.isShowing, text: hudController.text, afterDelay: hudController.delay) {
-            TabView(selection: $tabController.selectedIndex) {
-                CompaniesView()
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Restaurants")
-                    }
-                    .tag(0)
-                    
-                OrdersView()
-                    .tabItem {
-                        Image(systemName: "heart.text.square")
-                        Text("Orders")
-                    }
-                    .tag(1)
-                CompaniesView()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
-                    }
-                    .tag(2)
+    
+            ProgressHUDView(isShowing: $hudController.isShowing, text: hudController.text, afterDelay: hudController.delay) {
+                TabView(selection: $tabController.selectedIndex) {
+                    CompaniesView()
+                        .tabItem {
+                            Image(systemName: "house.fill")
+                            Text("Restaurants")
+                        }
+                        .tag(0)
+                        
+                    OrdersView()
+                        .tabItem {
+                            Image(systemName: "heart.text.square")
+                            Text("Orders")
+                        }
+                        .tag(1)
+                    SettingsView()
+                        .tabItem {
+                            Image(systemName: "person.fill")
+                            Text("Profile")
+                        }
+                        .tag(2)
+                }
+                .environmentObject(auth)
+                .accentColor(.black)
+                .background(Color.white)
+                .addPartialSheet(style: settings.style)
+                .fullScreenCover(isPresented: $auth.isNotLoggedIn) {
+                    LoginPageView()
+                        .environmentObject(auth)
+                }
+        
             }
-            .accentColor(.black)
-            .background(Color.white)
+        
             
-            .addPartialSheet(style: settings.style)
-        }
+        
+        
          
     }
 }

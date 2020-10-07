@@ -168,13 +168,17 @@ struct CartListView: View {
             if let err = err {
                 print(err)
             } else {
-                self.tabController.setTab(index: 1)
+               
                 self.cart.items = [:]
                 
                 hudController.show(text: "Your order will be processed in a minute", afterDelay: 3)
-                withAnimation {
-                    self.sheetManager.hideSheet()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        self.tabController.setTab(index: 1)
+                        self.sheetManager.hideSheet()
+                    }
                 }
+                
                 
                 
             }

@@ -12,8 +12,10 @@ struct LoginPageView: View {
     @State var password: String = ""
     @State var isOpened = false
     
+    @EnvironmentObject var auth: AuthenticationState
+    
     var body: some View {
-        NavigationView {
+        ProgressHUDView(isShowing: $isOpened, text: "Loading") {
             GeometryReader { geometry in
                 VStack {
                     Image("logo")
@@ -44,6 +46,10 @@ struct LoginPageView: View {
                     
                     Button(action: {
                         self.isOpened = true
+                        
+                        auth.login(with: .emailAndPassword(email: login, password: password)) {
+                            self.isOpened = false
+                        }
                     }) {
                         Text("Log in")
                             .modifier(BigButtonStyle())
@@ -53,14 +59,8 @@ struct LoginPageView: View {
                         Text("Already signed up?")
                             .font(.callout)
                     })
-                    
-                    
-                        
                 }
                 .padding()
-            }
-            .fullScreenCover(isPresented: $isOpened) {
-                CompaniesView()
             }
         }
     }

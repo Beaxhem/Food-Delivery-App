@@ -8,6 +8,8 @@ import SwiftUI
 
 class Order: Encodable, Identifiable {
     var id: UUID
+    var customerName: String
+    var customerEmail: String
     var items: [CartItem]
     var totalPrice: Float
     var deliveryDestination: String
@@ -17,6 +19,8 @@ class Order: Encodable, Identifiable {
     
     init() {
         self.id = UUID()
+        self.customerEmail = ""
+        self.customerName = ""
         self.items = []
         self.totalPrice = 0
         self.deliveryDestination = ""
@@ -26,6 +30,8 @@ class Order: Encodable, Identifiable {
     
     init(items: [CartItem], totalPrice: Float, deliveryDestination: String, source: String) {
         self.id = UUID()
+        self.customerEmail = UserDefaults.standard.string(forKey: "email")!
+        self.customerName = UserDefaults.standard.string(forKey: "name")!
         self.items = items
         self.totalPrice = totalPrice
         self.deliveryDestination = deliveryDestination

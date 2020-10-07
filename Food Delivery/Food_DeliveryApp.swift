@@ -18,6 +18,7 @@ struct Food_DeliveryApp: App {
     var tabController = TabController()
     var hudController = HUDController()
     
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
