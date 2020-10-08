@@ -174,7 +174,7 @@ struct CartListView: View {
                 hudController.show(text: "Your order will be processed in a minute", afterDelay: 3)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     withAnimation {
-                        self.tabController.setTab(index: 1)
+                        self.tabController.setTab(index: 2)
                         self.sheetManager.hideSheet()
                     }
                 }

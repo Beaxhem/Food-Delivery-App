@@ -29,18 +29,24 @@ struct RootView: View {
                         }
                         .tag(0)
                         
+                    MapView()
+                        .tabItem {
+                            Image(systemName: "map")
+                            Text("Map")
+                        }
+                        .tag(1)
                     OrdersView()
                         .tabItem {
                             Image(systemName: "heart.text.square")
                             Text("Orders")
                         }
-                        .tag(1)
+                        .tag(2)
                     SettingsView()
                         .tabItem {
                             Image(systemName: "person.fill")
                             Text("Profile")
                         }
-                        .tag(2)
+                        .tag(3)
                 }
                 .environmentObject(auth)
                 .accentColor(.black)
