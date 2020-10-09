@@ -25,7 +25,6 @@ struct CompaniesListView: View {
     }
     
     func getCompanies() {
-        sleep(1)
         DatabaseManager.shared.getCompanies { (res) in
             switch res {
             case .success(let result):

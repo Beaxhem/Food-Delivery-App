@@ -48,24 +48,6 @@ class DatabaseManager {
     func getDiscounts(completion: @escaping((Result<[Discount], Error>) -> Void)) {
         completion(.success(discounts))
     }
-
-    func createOrder(order: Order, completion: @escaping (Error?) -> Void) {
-        var ref: DocumentReference? = nil
-        
-        guard let data = order.getDict() else {
-            return
-        }
-        
-        ref = db.collection("orders").addDocument(data: data) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-                completion(err)
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-                completion(nil)
-            }
-        }
-    }
     
     func getCompanyByName(_ name: String, completion: @escaping (Result<Company, Error>) -> Void) {
         for company in companies {
@@ -78,7 +60,9 @@ class DatabaseManager {
         
         completion(.failure(DatabaseError.notFound(message: "Company with a name '\(name)' has not been found")))
     }
-    
+}
+
+extension DatabaseManager {
     func getOrders(completion: @escaping(Result<[Order], Error>) -> Void) {
         var orders = [Order]()
         db.collection("orders").getDocuments { (querySnapshot, error) in
@@ -87,7 +71,7 @@ class DatabaseManager {
             }
             
             for document in querySnapshot.documents {
-                let order = Order.from(dict: document.data())
+                let order = Order.from(dict: document.data(), documentID: document.documentID)
                 
                 orders.append(order)
             }
@@ -96,6 +80,27 @@ class DatabaseManager {
         
     }
     
+    func createOrder(order: Order, completion: @escaping (Error?) -> Void) {
+        guard let data = order.getDict() else {
+            return
+        }
+        
+        db.collection("orders").document(order.id.uuidString).setData(data) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                completion(err)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    func removeOrderBy(documentID: String, completion: @escaping (Error?) -> Void) {
+        db.collection("orders").document(documentID).delete(completion: completion)
+    }
+}
+
+extension DatabaseManager {
     func createUser(user: Customer, completion: @escaping (Error?) -> Void) {
         guard let data = user.getDict() else {
             return

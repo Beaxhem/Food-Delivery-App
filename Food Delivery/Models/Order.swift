@@ -28,8 +28,8 @@ class Order: Encodable, Identifiable {
         self.date = Date()
     }
     
-    init(items: [CartItem], totalPrice: Float, deliveryDestination: String, source: String) {
-        self.id = UUID()
+    init(id: UUID = UUID(), items: [CartItem], totalPrice: Float, deliveryDestination: String, source: String) {
+        self.id = id
         self.customerEmail = UserDefaults.standard.string(forKey: "email")!
         self.customerName = UserDefaults.standard.string(forKey: "name")!
         self.items = items
@@ -39,9 +39,10 @@ class Order: Encodable, Identifiable {
         self.date = Date()
     }
     
-    static func from(dict: [String: Any]) -> Order {
+    static func from(dict: [String: Any], documentID: String) -> Order {
         let order = Order()
-        
+    
+        order.id = UUID(uuidString: documentID)!
         order.deliveryDestination = dict["deliveryDestination"] as! String
         order.source = dict["source"] as! String
         order.status = Status(rawValue: dict["status"] as! String)!

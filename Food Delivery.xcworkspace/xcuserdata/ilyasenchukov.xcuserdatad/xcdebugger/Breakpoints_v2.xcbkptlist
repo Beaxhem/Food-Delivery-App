@@ -30,10 +30,10 @@
             filePath = "Food Delivery/Views/Cart/CartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "CartButtonView"
-            landmarkType = "14">
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "cart"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "A90765C0-8001-4933-B229-B2705902612D - 8ce3e3783f12eb81"

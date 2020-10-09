@@ -27,23 +27,36 @@ struct OrdersView: View {
             }
             
         }
-        .onAppear(perform: getOrders)
-        
+        .onAppear(perform: OrdersManager(orders: $orders, loadingState: $loadingState).getOrders)
+        .environmentObject(OrdersManager(orders: $orders, loadingState: $loadingState))
     }
     
-    func getOrders() {
-        DatabaseManager.shared.getOrders { res in
-            switch res {
-            case .failure(let error):
-                self.loadingState = .cancel
-                print(error)
-            case .success(let orders):
-                self.loadingState = .done
-                self.orders = orders
+    class OrdersManager: ObservableObject {
+        var loadingState: Binding<LoadingState>
+        var orders: Binding<[Order]>
+        
+        init(orders: Binding<[Order]>, loadingState: Binding<LoadingState>) {
+            self.orders = orders
+            self.loadingState = loadingState
+        }
+        
+        func getOrders() {
+            DatabaseManager.shared.getOrders { res in
+                switch res {
+                case .failure(let error):
+                    self.loadingState.wrappedValue = .cancel
+                    print(error)
+                case .success(let orders):
+                    self.loadingState.wrappedValue = .done
+                    self.orders.wrappedValue = orders
+                }
             }
         }
     }
+    
 }
+
+
 
 struct OrdersView_Previews: PreviewProvider {
     static var previews: some View {

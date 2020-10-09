@@ -12,6 +12,8 @@ struct OrderCellView: View {
     
     @State var company: Company = Company()
     
+    @EnvironmentObject var manager: OrdersView.OrdersManager
+    
     let dateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm dd/MM/yyyy "
@@ -44,6 +46,7 @@ struct OrderCellView: View {
                                 .resizable()
                                 .frame(width: 15, height: 15)
                                 .foregroundColor(.gray)
+                                .onTapGesture(perform: deleteOrder)
                         }
                         Text("\(order.date, formatter: self.dateFormat)")
                             .font(.caption)
@@ -103,6 +106,15 @@ struct OrderCellView: View {
         }
     }
     
+    func deleteOrder() {
+        DatabaseManager.shared.removeOrderBy(documentID: order.id.uuidString) { (err) in
+            if let err = err {
+                print(err)
+            } else {
+                manager.getOrders()
+            }
+        }
+    }
 }
 
 struct OrderCellView_Previews: PreviewProvider {
