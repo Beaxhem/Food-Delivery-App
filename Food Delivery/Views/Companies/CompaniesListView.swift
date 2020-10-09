@@ -9,10 +9,10 @@ import SwiftUI
 
 struct CompaniesListView: View {
     @State var companies: [Company] = []
+    @State var loadingState: LoadingState = .loading
     
     var body: some View {
-        
-            
+        LoadingView(state: loadingState) {
             VStack(spacing: 20) {
                 ForEach(companies) {company in
                     CompanyView(company: company)
@@ -20,18 +20,20 @@ struct CompaniesListView: View {
                 }
             }
             .padding(.vertical)
-            .onAppear(perform: getCompanies)
-        
-       
+        }
+        .onAppear(perform: getCompanies)
     }
     
     func getCompanies() {
+        sleep(1)
         DatabaseManager.shared.getCompanies { (res) in
             switch res {
             case .success(let result):
                 companies = result
+                self.loadingState = .done
             case .failure(let error):
                 print(error)
+                self.loadingState = .cancel
             }
         }
     }

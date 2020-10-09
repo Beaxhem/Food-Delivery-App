@@ -12,6 +12,7 @@ struct RootView: View {
     @EnvironmentObject var tabController: TabController
     @EnvironmentObject var settings: SheetManager
     @EnvironmentObject var hudController: HUDController
+    
     @ObservedObject var auth = AuthenticationState()
     
     init() {
@@ -28,13 +29,12 @@ struct RootView: View {
                             Text("Restaurants")
                         }
                         .tag(0)
-                        
-                    MapView()
-                        .tabItem {
-                            Image(systemName: "map")
-                            Text("Map")
-                        }
-                        .tag(1)
+                    Test()
+                    .tabItem {
+                        Image(systemName: "map")
+                        Text("Map")
+                    }
+                    .tag(1)
                     OrdersView()
                         .tabItem {
                             Image(systemName: "heart.text.square")

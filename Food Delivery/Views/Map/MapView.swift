@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 
 struct MapView: UIViewRepresentable {
+    @Binding var companies: [Company]
+    @Binding var isActive: Bool
+    @Binding var company: Company?
+    
     func makeCoordinator() -> MapViewCoordinator {
         MapViewCoordinator(self)
     }
@@ -18,18 +22,22 @@ struct MapView: UIViewRepresentable {
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
         
-        let annotation = MKPointAnnotation()
-        annotation.title = "London"
-        annotation.subtitle = "Capital of England"
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 51.5, longitude: 0.13)
-        mapView.addAnnotation(annotation)
-        
         return mapView
     }
     
     func updateUIView(_ view: MKMapView, context: Context){
         //If you changing the Map Annotation then you have to remove old Annotations
-        //mapView.removeAnnotations(mapView.annotations)
+        view.removeAnnotations(view.annotations)
+        
+        for company in self.companies {
+            let annotation = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double.random(in: 10..<50), longitude: Double.random(in: 1..<2)))
+            annotation.title = company.name
+            annotation.subtitle = company.name
+            annotation.imageName = company.imageName
+            annotation.company = company
+            
+            view.addAnnotation(annotation)
+        }
     }
 }
 
@@ -46,7 +54,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
     func getPinImage(with logo: UIImage) -> UIImage {
-        let pinImage = UIImage(named: "pin-1")
+        let pinImage = UIImage(named: "pin")
         
         let pinImageWidth: CGFloat = 50
         let pinImageHeight: CGFloat = pinImageWidth * 1.17
@@ -73,23 +81,73 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         let view = MKAnnotationView()
         view.frame = CGRect(x: 0, y: 0, width: 60, height: 100)
         
-        let logo = UIImage(named: "mcdonalds")
+        if let annotation = annotation as? CustomAnnotation {
+            let logo = UIImage(named: "\(annotation.imageName!)_logo")
+            
+            let imageView = UIImageView()
+            imageView.image = logo
+            imageView.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+            imageView.backgroundColor = .white
+            
+            view.leftCalloutAccessoryView = imageView
+            
+            let button = CustomButton(company: annotation.company!)
+            
+            
+            button.addTarget(self, action: #selector(navigate), for: .touchUpInside)
+            view.rightCalloutAccessoryView = button
+            
+            view.canShowCallout = true
+            
+            let pinImage = getPinImage(with: logo!)
+            view.image = pinImage
+            
+            
+        }
         
-        let imageView = UIImageView()
-        imageView.image = logo
-        imageView.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
-        imageView.backgroundColor = .white
-        
-        view.leftCalloutAccessoryView = imageView
-        
-        let button = UIButton(type: .detailDisclosure)
-        view.rightCalloutAccessoryView = button
-        
-        view.canShowCallout = true
-        
-        let pinImage = getPinImage(with: logo!)
-        view.image = pinImage
     
         return view
+    }
+    
+    @objc func navigate(sender: CustomButton) {
+        mapView.isActive = true
+        mapView.company = sender.company
+    }
+}
+
+class CustomAnnotation: NSObject, MKAnnotation {
+    
+    // This property must be key-value observable, which the `@objc dynamic` attributes provide.
+    @objc dynamic var coordinate: CLLocationCoordinate2D
+    
+    var title: String?
+    var subtitle: String?
+    var imageName: String?
+    var company: Company?
+    
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+        super.init()
+    }
+}
+
+class CustomButton: UIButton {
+    var company: Company
+    
+    init(company: Company) {
+        self.company = company
+        
+        super.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        
+        self.titleLabel?.text = "Info"
+        self.titleLabel?.textColor = .black
+        
+        self.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        
+    }
+    
+   
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

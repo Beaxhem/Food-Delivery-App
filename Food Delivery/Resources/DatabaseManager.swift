@@ -17,7 +17,7 @@ class DatabaseManager {
     private let db = Firestore.firestore()
     
     let companies = [
-        Company(name: "McDonalds", imageName: "mcdonalds"),
+        Company(name: "Test", imageName: "mcdonalds"),
         Company(name: "McDonalds", imageName: "mcdonalds"),
         Company(name: "McDonalds", imageName: "mcdonalds"),
         Company(name: "McDonalds", imageName: "mcdonalds"),
@@ -109,7 +109,7 @@ class DatabaseManager {
             if let error = error {
                 print(error)
             } else {
-                let data = document?.data() as [String: String]
+                let data = document?.data() as! [String: String]
                 let user = Customer.from(dict: data)
                 completion(.success(user))
             }
