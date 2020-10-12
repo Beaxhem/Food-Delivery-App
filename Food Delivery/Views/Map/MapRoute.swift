@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct Test: View {
+struct MapRoute: View {
     @State var companies = [Company]()
     @State var company: Company?
     @State var isActive = false
+    @State var isPresented = false
+    @EnvironmentObject var settings: SheetManager
     
     var body: some View {
         NavigationView {
@@ -20,11 +22,10 @@ struct Test: View {
                 }
                 
                 MapView(companies: $companies, isActive: $isActive, company: $company)
+                    .environmentObject(settings)
             }
-                
             .navigationTitle("")
             .navigationBarHidden(true)
-            
             
         }.onAppear {
             DatabaseManager.shared.getCompanies { (res) in
@@ -40,8 +41,8 @@ struct Test: View {
     }
 }
 
-struct Test_Previews: PreviewProvider {
+struct MapRoute_Previews: PreviewProvider {
     static var previews: some View {
-        Test()
+        MapRoute()
     }
 }

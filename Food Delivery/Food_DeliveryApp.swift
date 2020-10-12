@@ -29,6 +29,7 @@ struct Food_DeliveryApp: App {
                 .environmentObject(cart)
                 .environmentObject(tabController)
                 .environmentObject(hudController)
+                
         }
     }
 }

@@ -13,9 +13,17 @@ struct MapView: UIViewRepresentable {
     @Binding var companies: [Company]
     @Binding var isActive: Bool
     @Binding var company: Company?
+    @EnvironmentObject var settings: SheetManager
+    
+    func show(company: Company) {
+        self.company = company
+        settings.showPartialSheet {
+            CompanyShortDetails(isActive: $isActive, company: company)
+        }
+    }
     
     func makeCoordinator() -> MapViewCoordinator {
-        MapViewCoordinator(self)
+        MapViewCoordinator(self, controlFunc: show)
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -42,15 +50,14 @@ struct MapView: UIViewRepresentable {
 }
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
+    @EnvironmentObject var sheetManager: SheetManager
     
-      var mapView: MapView
-        
-      init(_ control: MapView) {
-          self.mapView = control
-      }
-        
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("Tapped")
+    var mapView: MapView
+    var controlFunc: (Company) -> Void
+    
+    init(_ control: MapView, controlFunc: @escaping (Company) -> Void) {
+        self.mapView = control
+        self.controlFunc = controlFunc
     }
     
     func getPinImage(with logo: UIImage) -> UIImage {
@@ -97,7 +104,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
             button.addTarget(self, action: #selector(navigate), for: .touchUpInside)
             view.rightCalloutAccessoryView = button
             
-            view.canShowCallout = true
+            //            view.canShowCallout = true
             
             let pinImage = getPinImage(with: logo!)
             view.image = pinImage
@@ -105,8 +112,14 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
             
         }
         
-    
+        
         return view
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? CustomAnnotation {
+            controlFunc(annotation.company!)
+        }
     }
     
     @objc func navigate(sender: CustomButton) {
@@ -146,7 +159,7 @@ class CustomButton: UIButton {
         
     }
     
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

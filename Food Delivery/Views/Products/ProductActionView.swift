@@ -14,10 +14,14 @@ enum Options: String {
 public struct ProductActionView: View {
     var product: Product
     var callback: () -> Void
+    @EnvironmentObject var sheetManager: SheetManager
     
     public var body: some View {
         
         VStack(alignment: .leading) {
+            CloseButton(onTap: {
+                sheetManager.hideSheet()
+            }, style: .dark)
             
             HStack {
                 Image(product.imageName)

@@ -41,18 +41,7 @@ struct CartListView: View {
     
     public var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Image(systemName: "multiply")
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .foregroundColor(.black)
-                    .onTapGesture {
-                        withAnimation {
-                            sheetManager.hideSheet()
-                        }
-                    }
-            }
+            CloseButton(onTap: sheetManager.hideSheet)
             .offset(x: -25, y: -5)
             
             if !cart.isEmpty() {
