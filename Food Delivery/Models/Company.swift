@@ -12,22 +12,30 @@ class Company: Identifiable {
     var name: String
     var imageName: String
     var logoName: String
-    var categories: [Category]
     
     init() {
         self.id = UUID()
         self.name = ""
         self.imageName = ""
         self.logoName = ""
-        self.categories = [Category]()
     }
     
-    init(name: String, imageName: String = "mcdonalds", logoName: String = "mcdonalds_logo", categories: [Category] = []) {
+    init(name: String, imageName: String = "mcdonalds", logoName: String = "mcdonalds_logo") {
         self.id = UUID()
         self.name = name
         self.imageName = imageName
         self.logoName = logoName
-        self.categories = categories
+    }
+    
+    static func from(dict: [String: Any], documentID: String) -> Company {
+        let company = Company()
+        
+        company.id = UUID(uuidString: documentID)!
+        company.name = dict["name"] as! String
+        company.imageName = dict["imageName"] as! String
+        company.logoName = dict["logoName"] as! String
+        
+        return company
     }
 }
 
@@ -36,9 +44,24 @@ class Category: Identifiable {
     var name: String
     var iconName: String
     
+    init() {
+        self.id = UUID()
+        self.name = ""
+        self.iconName = ""
+    }
+    
     init(name: String, iconName: String) {
         self.id = UUID()
         self.name = name
         self.iconName = iconName
+    }
+    
+    static func from(dict: [String: Any]) -> Category {
+        let category = Category()
+        
+        category.iconName = dict["iconName"] as! String
+        category.name = dict["name"] as! String
+        
+        return category
     }
 }

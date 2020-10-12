@@ -38,6 +38,20 @@ class DatabaseManager {
     ]
     
     func getCompanies(completion: @escaping((Result<[Company], Error>) -> Void)) {
+        db.collection("companies").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var companies: [Company] = []
+                
+                for doc in querySnapshot!.documents {
+                    let company = Company.from(dict: doc.data(), documentID: doc.documentID)
+                    companies.append(company)
+                }
+                
+                completion(.success(companies))
+            }
+        }
         completion(.success(companies))
     }
     
