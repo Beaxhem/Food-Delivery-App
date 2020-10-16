@@ -39,10 +39,15 @@ class Order: Encodable, Identifiable {
         self.date = Date()
     }
     
-    static func from(dict: [String: Any], documentID: String) -> Order {
+    static func from(dict: [String: Any], documentID: String? = nil) -> Order {
         let order = Order()
     
-        order.id = UUID(uuidString: documentID)!
+        if let documentID = documentID {
+            order.id = UUID(uuidString: documentID)!
+        } else {
+            order.id = UUID()
+        }
+        
         order.deliveryDestination = dict["deliveryDestination"] as! String
         order.source = dict["source"] as! String
         order.status = Status(rawValue: dict["status"] as! String)!

@@ -24,7 +24,7 @@ class Company: Identifiable {
         self.id = UUID()
         self.name = name
         self.imageName = imageName
-        self.logoName = logoName
+        self.logoName = logoName    
     }
     
     static func from(dict: [String: Any], documentID: String) -> Company {

@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseDatabase
 
 enum DatabaseError: Error {
     case notFound(message: String)
@@ -15,6 +16,7 @@ enum DatabaseError: Error {
 class DatabaseManager {
     static let shared = DatabaseManager()
     private let db = Firestore.firestore()
+    private let realTimeDB = Database.database().reference()
     
     let companies = [
         Company(name: "Test", imageName: "mcdonalds"),
@@ -52,7 +54,7 @@ class DatabaseManager {
                 completion(.success(companies))
             }
         }
-        completion(.success(companies))
+        
     }
     
     func getProducts(id: String, completion: @escaping (Result<[Product], Error>) -> Void) {
@@ -79,38 +81,42 @@ class DatabaseManager {
 extension DatabaseManager {
     func getOrders(completion: @escaping(Result<[Order], Error>) -> Void) {
         var orders = [Order]()
-        db.collection("orders").getDocuments { (querySnapshot, error) in
-            guard let querySnapshot = querySnapshot else {
+        realTimeDB.child("orders").observeSingleEvent(of: .value) { (snapshot) in
+            guard let value = snapshot.value as? NSDictionary else {
+                completion(.failure(DatabaseError.notFound(message: "Not found")))
                 return
             }
             
-            for document in querySnapshot.documents {
-                let order = Order.from(dict: document.data(), documentID: document.documentID)
-                
+            let ids = value.allKeys as! [String]
+            
+            for id in ids {
+                let document = value.value(forKey: id) as! [String: Any]
+                let order = Order.from(dict: document, documentID: id)
+
                 orders.append(order)
             }
             completion(.success(orders))
+
         }
-        
     }
     
     func createOrder(order: Order, completion: @escaping (Error?) -> Void) {
         guard let data = order.getDict() else {
             return
         }
-        
-        db.collection("orders").document(order.id.uuidString).setData(data) { err in
+        realTimeDB.child("orders").child("\(order.id)").setValue(data) { err, ref in
             if let err = err {
-                print("Error adding document: \(err)")
+                print(err)
                 completion(err)
             } else {
+                print("Order created")
                 completion(nil)
             }
         }
     }
     
     func removeOrderBy(documentID: String, completion: @escaping (Error?) -> Void) {
-        db.collection("orders").document(documentID).delete(completion: completion)
+        realTimeDB.child("orders").child(documentID).setValue(nil)
     }
 }
 
